@@ -1,0 +1,17 @@
+<html>
+   <table style="width:50%">
+     <tr>
+       <th>Name</th>
+       <th>ID</th>
+       <th>Leaves</th>
+     </tr>
+
+    {{ range .Employees }}
+      			<tr>
+              		<td>{{ .Name }}</td>
+                  <td>{{ .ID }}</td>
+                  <td>{{ .Leaves }}</td>
+      			</tr>
+			{{ end }} 
+   </table>
+ </html>
