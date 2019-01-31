@@ -8,17 +8,25 @@ import (
 
 func addLeave(db *sql.DB) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		id := r.FormValue("id")
-		stmt, err := db.Prepare("update leaves set leaves=leaves+1 where id = ?")
+		rows, err := db.Query("SELECT COUNT(*) FROM leaves")
 		checkErr(err)
 
-		res, err := stmt.Exec(id)
-		checkErr(err)
+		var count = 0
+		for rows.Next() {
+			count = count + 1
+		}
+		for i := 0; i <= count; i++ {
+			id := r.FormValue(fmt.Sprintf("id%d", i))
+			stmt, err := db.Prepare("update leaves set leaves=leaves+1 where id = ?")
+			checkErr(err)
 
-		affect, err := res.RowsAffected()
-		checkErr(err)
+			res, err := stmt.Exec(id)
+			checkErr(err)
 
-		fmt.Println(affect)
+			affect, err := res.RowsAffected()
+			checkErr(err)
+			fmt.Println(affect)
+		}
 	})
 }
 
