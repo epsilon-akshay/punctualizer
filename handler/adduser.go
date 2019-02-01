@@ -21,5 +21,6 @@ func addUser(db *sql.DB) http.HandlerFunc {
 		checkErr(err)
 
 		fmt.Println(affect)
+		w.Write([]byte("added user"))
 	})
 }

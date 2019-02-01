@@ -17,7 +17,7 @@ func NewRouter(db *sql.DB) http.Handler {
 	router.HandleFunc("/show_leaves", showLeaves)
 
 	addUser := addUser(db)
-	router.HandleFunc("/add_User", addUser)
+	router.HandleFunc("/add_user", addUser)
 
 	return router
 }
