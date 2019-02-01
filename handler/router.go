@@ -9,10 +9,15 @@ import (
 
 func NewRouter(db *sql.DB) http.Handler {
 	router := mux.NewRouter()
+
 	addLeaves := addLeave(db)
 	router.HandleFunc("/add_leaves", addLeaves)
 
 	showLeaves := showLeave(db)
 	router.HandleFunc("/show_leaves", showLeaves)
+
+	addUser := addUser(db)
+	router.HandleFunc("/add_User", addUser)
+
 	return router
 }
